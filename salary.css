@@ -1,0 +1,114 @@
+:root {
+  --blue: #1e4d8f;
+  --light-blue: #3468b2;
+  --gray: #6b7280;
+  --border: #cbd5e1;
+  --bg: #f8fafc;
+  --green: #22c55e;
+  --red: #dc2626;
+}
+* {
+  box-sizing: border-box;
+  font-family: "Times New Roman", Times, serif;
+}
+
+body {
+  margin: 0;
+  background: #f8fafc;
+}
+
+.header {
+  background: #1e4d8f;
+  color: #fff;
+  text-align: center;
+  padding: 30px;
+}
+
+label.required::after {
+  content: " *";
+  color: red;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 14px;
+  border: 2px solid #cbd5e1;
+}
+
+.section {
+  border: 2px solid #cbd5e1;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+
+.section h3 {
+  color: #1e4d8f;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.grid div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+input, select {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #cbd5e1;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background: #f1f5f9;
+}
+
+.add {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.total-box {
+  background: #eef2ff;
+  padding: 15px;
+  font-size: 18px;
+  text-align: right;
+  font-weight: bold;
+}
+
+canvas {
+  border: 2px dashed #cbd5e1;
+  width: 100%;
+  height: 120px;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

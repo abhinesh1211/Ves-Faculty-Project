@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visiting Faculty Salary Calculator</title>
+<link rel="stylesheet" href="salary.css">
+</head>
+
+<body>
+
+<div class="header">
+  <h1>Visiting Faculty Remuneration Bill</h1>
+</div>
+
+<div class="container">
+
+  <!-- BILL DATE & FACULTY NAME -->
+  <div class="section grid">
+    <div>
+      <label class="required">Bill Date :</label>
+      <input type="date">
+    </div>
+    <div>
+      <label class="required">Faculty Full Name :</label>
+      <input type="text">
+    </div>
+  </div>
+
+  <!-- FACULTY DETAILS -->
+  <div class="section">
+    <h3>Faculty Details</h3>
+    <div class="grid">
+      <div>
+        <label class="required">Email :</label>
+        <input id="email" type="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" placeholder="example@gmail.com">
+
+      </div>
+      <div>
+        <label class="required">Contact :</label>
+        <input id="phone" type="tel" placeholder="9876543210" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" required>
+      </div>
+      <div>
+        <label class="required">Gender :</label>
+        <select>
+          <option value="">Select</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div>
+        <label class="required">Salary :</label>
+        <input type="text" inputmode="numeric" pattern="[0-9]{7}" placeholder="10000" maxlength="7" required>
+      </div>
+    </div>
+  </div>
+
+  <!-- BILL DETAILS -->
+  <div class="section">
+    <h3>Bill Details</h3>
+    <div class="grid">
+      <div>
+        <label class="required">Class :</label>
+        <input type="text" required>
+      </div>
+      <div>
+        <label class="required">Semester :</label>
+        <input type="text" inputmode="numeric" required maxlength="1" pattern="[1-6]{1}">
+      </div>
+      <div>
+        <label class="required">Subject :</label>
+        <input type="text" required>
+      </div>
+      <div>
+        <label class="required">Month :</label>
+        <select id="month" required>
+          <option value="">Select Month</option>
+          <option>January</option>
+          <option>February</option>
+          <option>March</option>
+          <option>April</option>
+          <option>May</option>
+          <option>June</option>
+          <option>July</option>
+          <option>August</option>
+          <option>September</option>
+          <option>October</option>
+          <option>November</option>
+          <option>December</option>
+
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- THEORY LECTURES -->
+  <div class="section">
+    <h3>Theory Lectures</h3>
+    <table id="theoryTable">
+      <tr>
+        <th>Sr</th><th>Date</th><th>Day</th><th>From</th><th>To</th><th>No. of Hours</th>
+      </tr>
+      <tr><td>1</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="theoryH" value="0" oninput="calc()"></td></tr>
+      <tr><td>2</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="theoryH" value="0" oninput="calc()"></td></tr>
+      <tr><td>3</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="theoryH" value="0" oninput="calc()"></td></tr>
+      <tr><td>4</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="theoryH" value="0" oninput="calc()"></td></tr>
+      <tr><td>5</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="theoryH" value="0" oninput="calc()"></td></tr>
+    </table>
+    <button class="add" onclick="addRow('theoryTable','theory')">+ Add Theory</button>
+  </div>
+
+  <!-- PRACTICAL LECTURES -->
+  <div class="section">
+    <h3>Practical Lectures</h3>
+    <table id="practicalTable">
+      <tr>
+        <th>Sr</th><th>Date</th><th>Day</th><th>From</th><th>To</th><th>No. of Hours</th>
+      </tr>
+      <tr><td>1</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="practicalH" value="0" oninput="calc()"></td></tr>
+      <tr><td>2</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="practicalH" value="0" oninput="calc()"></td></tr>
+      <tr><td>3</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="practicalH" value="0" oninput="calc()"></td></tr>
+      <tr><td>4</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="practicalH" value="0" oninput="calc()"></td></tr>
+      <tr><td>5</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="practicalH" value="0" oninput="calc()"></td></tr>
+    </table>
+    <button class="add" onclick="addRow('practicalTable','practical')">+ Add Practical</button>
+  </div>
+
+  <!-- BILL SUMMARY -->
+  <div class="section grid">
+    <div><label>Theory Hours :</label><input id="theoryTotal" readonly></div>
+    <div><label>Theory Rate :</label><input id="theoryRate" oninput="calcBill()"></div>
+    <div><label>Practical Hours :</label><input id="practicalTotal" readonly></div>
+    <div><label>Practical Rate :</label><input id="practicalRate" oninput="calcBill()"></div>
+  </div>
+
+  <div class="total-box">
+    Total Bill Amount ₹ <span id="totalBill">0</span>
+  </div>
+
+  <!-- DIGITAL SIGNATURE -->
+  <div class="section">
+    <h3>Digital Signature</h3>
+    <canvas id="sign"></canvas>
+    <button class="add" onclick="clearSignature()">Clear Signature</button>
+  </div>
+
+  <button class="add">Submit Bill</button>
+
+</div>
+
+<script src="salary.js"></script>
+</body>
+</html>

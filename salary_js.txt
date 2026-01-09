@@ -1,0 +1,90 @@
+// ====== Add Table Rows ======
+function addRow(tableId, type) {
+  let table = document.getElementById(tableId);
+  let r = table.rows.length;
+  let row = table.insertRow();
+  row.innerHTML = `
+    <td>${r}</td>
+    <td><input type="date"></td>
+    <td>
+      <select>
+        <option>Mon</option><option>Tue</option><option>Wed</option>
+        <option>Thu</option><option>Fri</option><option>Sat</option>
+      </select>
+    </td>
+    <td><input type="time"></td>
+    <td><input type="time"></td>
+    <td><input class="${type}H" value="0" oninput="calc()"></td>
+  `;
+}
+
+// ====== Calculate Hours ======
+function calc() {
+  let th = [...document.querySelectorAll(".theoryH")].reduce((a,b)=>a+Number(b.value||0),0);
+  let pr = [...document.querySelectorAll(".practicalH")].reduce((a,b)=>a+Number(b.value||0),0);
+  document.getElementById("theoryTotal").value = th;
+  document.getElementById("practicalTotal").value = pr;
+  calcBill();
+}
+
+// ====== Calculate Total Bill ======
+function calcBill() {
+  let th = +document.getElementById("theoryTotal").value || 0;
+  let pr = +document.getElementById("practicalTotal").value || 0;
+  let tr = +document.getElementById("theoryRate").value || 0;
+  let prr = +document.getElementById("practicalRate").value || 0;
+  document.getElementById("totalBill").innerText = (th * tr) + (pr * prr);
+}
+
+// ====== Digital Signature ======
+const canvas = document.getElementById("sign");
+const ctx = canvas.getContext("2d");
+
+canvas.width = canvas.offsetWidth;
+canvas.height = canvas.offsetHeight;
+
+ctx.lineWidth = 2;
+ctx.lineCap = "round";
+
+let drawing = false;
+
+canvas.addEventListener("mousedown", e => {
+  drawing = true;
+  ctx.beginPath();
+  ctx.moveTo(e.offsetX, e.offsetY);
+});
+
+canvas.addEventListener("mousemove", e => {
+  if (!drawing) return;
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.stroke();
+});
+
+canvas.addEventListener("mouseup", () => drawing = false);
+canvas.addEventListener("mouseleave", () => drawing = false);
+
+// Touch support
+canvas.addEventListener("touchstart", e => {
+  e.preventDefault();
+  const t = e.touches[0];
+  const r = canvas.getBoundingClientRect();
+  ctx.beginPath();
+  ctx.moveTo(t.clientX - r.left, t.clientY - r.top);
+  drawing = true;
+});
+
+canvas.addEventListener("touchmove", e => {
+  e.preventDefault();
+  if (!drawing) return;
+  const t = e.touches[0];
+  const r = canvas.getBoundingClientRect();
+  ctx.lineTo(t.clientX - r.left, t.clientY - r.top);
+  ctx.stroke();
+});
+
+canvas.addEventListener("touchend", () => drawing = false);
+
+// ====== Clear Signature ======
+function clearSignature() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
