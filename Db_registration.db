@@ -1,0 +1,16 @@
+CREATE TABLE faculty_registration (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fname VARCHAR(50),
+    mname VARCHAR(50),
+    lname VARCHAR(50),
+    email VARCHAR(100),
+    phone VARCHAR(10),
+    aadhaar VARCHAR(12),
+    pan VARCHAR(10),
+    account VARCHAR(20),
+    ifsc VARCHAR(11),
+    resume VARCHAR(255),
+    aadhaar_file VARCHAR(255),
+    pan_file VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

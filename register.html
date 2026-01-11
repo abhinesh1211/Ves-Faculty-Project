@@ -11,32 +11,41 @@
 <section class="form-section">
   <h1 class="form-title">Faculty Registration</h1>
 
-  <form id="facultyForm">
+  <form id="facultyForm" action="register.php" method="POST" enctype="multipart/form-data">
 
     <h3>Personal Details</h3>
+
     <div class="form-group">
       <label class="required">First Name</label>
-      <input name="fname" type="text" required>
+      <input type="text" name="fname" required>
     </div>
 
     <div class="form-group">
       <label class="required">Middle Name</label>
-      <input name="mname" type="text" required>
+      <input type="text" name="mname" required>
     </div>
 
     <div class="form-group">
       <label class="required">Last Name</label>
-      <input name="lname" type="text" required>
+      <input type="text" name="lname" required>
     </div>
 
     <div class="form-group">
       <label class="required" for="email">Email</label>
-      <input id="email" type="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" placeholder="example@gmail.com">
+      <input id="email" name="email" type="email"
+             placeholder="example@gmail.com"
+             pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+             required>
     </div>
 
     <div class="form-group">
       <label class="required" for="phone">Phone</label>
-      <input id="phone" type="tel" placeholder="9876543210" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" required>
+      <input id="phone" name="phone" type="tel"
+             placeholder="9876543210"
+             inputmode="numeric"
+             pattern="[0-9]{10}"
+             maxlength="10"
+             required>
     </div>
 
     <h3>Documents</h3>
@@ -45,9 +54,9 @@
     <div class="form-group">
       <label class="required">Upload Resume</label>
       <div class="upload-box">
-        <input id="resumeFile" type="file" accept=".pdf,.doc,.docx" style="display: none;">
+        <input id="resumeFile" name="resume" type="file" accept=".pdf,.doc,.docx" hidden required>
         <label for="resumeFile" class="upload-content">
-          <img src="c:/Users/Admin/Downloads/upload_img-removebg-preview.png" alt="Upload">
+          <img src="assest/upload_img-removebg-preview.png" alt="Upload">
           <p id="resumeText">Click to upload Resume</p>
         </label>
       </div>
@@ -55,16 +64,22 @@
 
     <!-- Aadhaar -->
     <div class="form-group">
-      <label class="required" for="aadhaar">Aadhaar Card Number</label>
-      <input id="aadhaar" name="aadhaar" type="text" placeholder="1234 5678 9874" inputmode="numeric" pattern="[0-9]{12}" maxlength="12" oninput="this.value=this.value.replace(/[^0-9]/g,'')" required>
+      <label class="required">Aadhaar Card Number</label>
+      <input type="text" name="aadhaar"
+             placeholder="123456789012"
+             inputmode="numeric"
+             pattern="[0-9]{12}"
+             maxlength="12"
+             oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+             required>
     </div>
 
     <div class="form-group">
       <label class="required">Upload Aadhaar</label>
       <div class="upload-box">
-        <input id="aadhaarFile" type="file" accept=".pdf,.doc,.docx" style="display: none;">
+        <input id="aadhaarFile" name="aadhaar_file" type="file" accept=".pdf,.doc,.docx" hidden required>
         <label for="aadhaarFile" class="upload-content">
-          <img src="assest\upload_img-removebg-preview.png" alt="Upload">
+          <img src="assest/upload_img-removebg-preview.png" alt="Upload">
           <p id="aadhaarText">Click to upload Aadhaar</p>
         </label>
       </div>
@@ -72,53 +87,64 @@
 
     <!-- PAN -->
     <div class="form-group">
-      <label class="required" for="pan">PAN Card Number</label>
-      <input id="pan" type="text" name="pan" placeholder="ABCDE1234F" pattern="^[A-Z]{5}[0-9]{4}[A-Z]{1}" maxlength="10" style="text-transform: uppercase;" oninput="this.value=this.value.toUpperCase()" required>
+      <label class="required">PAN Card Number</label>
+      <input type="text" name="pan"
+             placeholder="ABCDE1234F"
+             pattern="^[A-Z]{5}[0-9]{4}[A-Z]{1}$"
+             maxlength="10"
+             style="text-transform: uppercase;"
+             oninput="this.value=this.value.toUpperCase()"
+             required>
     </div>
 
     <div class="form-group">
       <label class="required">Upload PAN</label>
       <div class="upload-box">
-        <input id="panFile" type="file" accept=".pdf,.doc,.docx" style="display: none;">
+        <input id="panFile" name="pan_file" type="file" accept=".pdf,.doc,.docx" hidden required>
         <label for="panFile" class="upload-content">
-          <img src="assest\upload_img-removebg-preview.png" alt="Upload">
+          <img src="assest/upload_img-removebg-preview.png" alt="Upload">
           <p id="panText">Click to upload PAN</p>
         </label>
-      </div>  
+      </div>
     </div>
 
     <h3>Bank Details</h3>
+
     <div class="form-group">
-      <label class="required" for="account">Account Number</label>
-      <input id="account" type="text" name="account" placeholder="Enter account number" inputmode="numeric" pattern="[0-9]{9,18}" maxlength="18" oninput="this.value=this.value.replace(/[^0-9]/g,'')" required>
+      <label class="required">Account Number</label>
+      <input type="text" name="account"
+             placeholder="Enter account number"
+             inputmode="numeric"
+             pattern="[0-9]{9,18}"
+             maxlength="18"
+             oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+             required>
     </div>
 
     <div class="form-group">
-      <label class="required" for="ifsc">IFSC Code</label>
-      <input id="ifsc" type="text" placeholder="Ex SBIN001234" pattern="^[A-Z]{4}0[A-Z0-9]{6}$" maxlength="11" style="text-transform: uppercase;" oninput="this.value=this.value.toUpperCase()" required>
+      <label class="required">IFSC Code</label>
+      <input type="text" name="ifsc"
+             placeholder="SBIN0012345"
+             pattern="^[A-Z]{4}0[A-Z0-9]{6}$"
+             maxlength="11"
+             style="text-transform: uppercase;"
+             oninput="this.value=this.value.toUpperCase()"
+             required>
     </div>
 
     <button type="submit">Submit Registration</button>
   </form>
 
-  <div class="success" id="success" style="display:none;">
-    <h2>Registration Successful ✔</h2>
-    <p>Thank you for registering.</p>
-    <a href="index.html">← Back to Home</a>
-  </div>
 </section>
 
 <script>
-  // Show uploaded file name and link
   function setupFileInput(inputId, textId) {
     const input = document.getElementById(inputId);
     const text = document.getElementById(textId);
 
     input.addEventListener("change", () => {
       if (input.files.length > 0) {
-        const file = input.files[0];
-        const url = URL.createObjectURL(file);
-        text.innerHTML = `File uploaded: <a href="${url}" target="_blank">${file.name}</a>`;
+        text.textContent = "Uploaded: " + input.files[0].name;
       } else {
         text.textContent = "Click to upload";
       }
@@ -128,13 +154,6 @@
   setupFileInput("resumeFile", "resumeText");
   setupFileInput("aadhaarFile", "aadhaarText");
   setupFileInput("panFile", "panText");
-
-  // Form submit handler
-  document.getElementById("facultyForm").addEventListener("submit", function(e){
-    e.preventDefault();
-    this.style.display = "none";
-    document.getElementById("success").style.display = "block";
-  });
 </script>
 
 </body>
