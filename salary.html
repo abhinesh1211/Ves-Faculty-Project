@@ -8,22 +8,22 @@
 </head>
 
 <body>
-
 <div class="header">
   <h1>Visiting Faculty Remuneration Bill</h1>
 </div>
 
+<form method="POST" action="process_salary.php" id="billForm" enctype="multipart/form-data">
 <div class="container">
 
   <!-- BILL DATE & FACULTY NAME -->
   <div class="section grid">
     <div>
       <label class="required">Bill Date :</label>
-      <input type="date">
+      <input type="date" name="bill_date" required>
     </div>
     <div>
       <label class="required">Faculty Full Name :</label>
-      <input type="text">
+      <input type="text" name="faculty_name" required>
     </div>
   </div>
 
@@ -33,16 +33,15 @@
     <div class="grid">
       <div>
         <label class="required">Email :</label>
-        <input id="email" type="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" placeholder="example@gmail.com">
-
+        <input id="email" type="email" name="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" placeholder="example@gmail.com">
       </div>
       <div>
         <label class="required">Contact :</label>
-        <input id="phone" type="tel" placeholder="9876543210" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" required>
+        <input id="phone" type="tel" name="phone" placeholder="9876543210" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" required>
       </div>
       <div>
         <label class="required">Gender :</label>
-        <select>
+        <select name="gender" required>
           <option value="">Select</option>
           <option>Male</option>
           <option>Female</option>
@@ -51,7 +50,7 @@
       </div>
       <div>
         <label class="required">Salary :</label>
-        <input type="text" inputmode="numeric" pattern="[0-9]{7}" placeholder="10000" maxlength="7" required>
+        <input type="text" name="salary" inputmode="numeric" pattern="[0-9]{1,7}" placeholder="10000" maxlength="7" required>
       </div>
     </div>
   </div>
@@ -62,19 +61,19 @@
     <div class="grid">
       <div>
         <label class="required">Class :</label>
-        <input type="text" required>
+        <input type="text" name="class_name" required>
       </div>
       <div>
         <label class="required">Semester :</label>
-        <input type="text" inputmode="numeric" required maxlength="1" pattern="[1-6]{1}">
+        <input type="text" name="semester" inputmode="numeric" required maxlength="1" pattern="[1-6]{1}">
       </div>
       <div>
         <label class="required">Subject :</label>
-        <input type="text" required>
+        <input type="text" name="subject" required>
       </div>
       <div>
         <label class="required">Month :</label>
-        <select id="month" required>
+        <select id="month" name="month" required>
           <option value="">Select Month</option>
           <option>January</option>
           <option>February</option>
@@ -88,7 +87,6 @@
           <option>October</option>
           <option>November</option>
           <option>December</option>
-
         </select>
       </div>
     </div>
@@ -101,13 +99,13 @@
       <tr>
         <th>Sr</th><th>Date</th><th>Day</th><th>From</th><th>To</th><th>No. of Hours</th>
       </tr>
-      <tr><td>1</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="theoryH" value="0" oninput="calc()"></td></tr>
-      <tr><td>2</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="theoryH" value="0" oninput="calc()"></td></tr>
-      <tr><td>3</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="theoryH" value="0" oninput="calc()"></td></tr>
-      <tr><td>4</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="theoryH" value="0" oninput="calc()"></td></tr>
-      <tr><td>5</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="theoryH" value="0" oninput="calc()"></td></tr>
+      <tr><td>1</td><td><input type="date" class="theory-date" name="theory_dates[0][date]"></td><td><select class="theory-day" name="theory_dates[0][day]"><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time" class="theory-from" name="theory_dates[0][from]"></td><td><input type="time" class="theory-to" name="theory_dates[0][to]"></td><td><input class="theoryH" name="theory_dates[0][hours]" value="0" oninput="calc()"></td></tr>
+      <tr><td>2</td><td><input type="date" class="theory-date" name="theory_dates[1][date]"></td><td><select class="theory-day" name="theory_dates[1][day]"><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time" class="theory-from" name="theory_dates[1][from]"></td><td><input type="time" class="theory-to" name="theory_dates[1][to]"></td><td><input class="theoryH" name="theory_dates[1][hours]" value="0" oninput="calc()"></td></tr>
+      <tr><td>3</td><td><input type="date" class="theory-date" name="theory_dates[2][date]"></td><td><select class="theory-day" name="theory_dates[2][day]"><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time" class="theory-from" name="theory_dates[2][from]"></td><td><input type="time" class="theory-to" name="theory_dates[2][to]"></td><td><input class="theoryH" name="theory_dates[2][hours]" value="0" oninput="calc()"></td></tr>
+      <tr><td>4</td><td><input type="date" class="theory-date" name="theory_dates[3][date]"></td><td><select class="theory-day" name="theory_dates[3][day]"><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time" class="theory-from" name="theory_dates[3][from]"></td><td><input type="time" class="theory-to" name="theory_dates[3][to]"></td><td><input class="theoryH" name="theory_dates[3][hours]" value="0" oninput="calc()"></td></tr>
+      <tr><td>5</td><td><input type="date" class="theory-date" name="theory_dates[4][date]"></td><td><select class="theory-day" name="theory_dates[4][day]"><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time" class="theory-from" name="theory_dates[4][from]"></td><td><input type="time" class="theory-to" name="theory_dates[4][to]"></td><td><input class="theoryH" name="theory_dates[4][hours]" value="0" oninput="calc()"></td></tr>
     </table>
-    <button class="add" onclick="addRow('theoryTable','theory')">+ Add Theory</button>
+    <button type="button" class="add" onclick="addRow('theoryTable','theory')">+ Add Theory</button>
   </div>
 
   <!-- PRACTICAL LECTURES -->
@@ -117,38 +115,159 @@
       <tr>
         <th>Sr</th><th>Date</th><th>Day</th><th>From</th><th>To</th><th>No. of Hours</th>
       </tr>
-      <tr><td>1</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="practicalH" value="0" oninput="calc()"></td></tr>
-      <tr><td>2</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="practicalH" value="0" oninput="calc()"></td></tr>
-      <tr><td>3</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="practicalH" value="0" oninput="calc()"></td></tr>
-      <tr><td>4</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="practicalH" value="0" oninput="calc()"></td></tr>
-      <tr><td>5</td><td><input type="date"></td><td><select><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time"></td><td><input type="time"></td><td><input class="practicalH" value="0" oninput="calc()"></td></tr>
+      <tr><td>1</td><td><input type="date" class="practical-date" name="practical_dates[0][date]"></td><td><select class="practical-day" name="practical_dates[0][day]"><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time" class="practical-from" name="practical_dates[0][from]"></td><td><input type="time" class="practical-to" name="practical_dates[0][to]"></td><td><input class="practicalH" name="practical_dates[0][hours]" value="0" oninput="calc()"></td></tr>
+      <tr><td>2</td><td><input type="date" class="practical-date" name="practical_dates[1][date]"></td><td><select class="practical-day" name="practical_dates[1][day]"><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time" class="practical-from" name="practical_dates[1][from]"></td><td><input type="time" class="practical-to" name="practical_dates[1][to]"></td><td><input class="practicalH" name="practical_dates[1][hours]" value="0" oninput="calc()"></td></tr>
+      <tr><td>3</td><td><input type="date" class="practical-date" name="practical_dates[2][date]"></td><td><select class="practical-day" name="practical_dates[2][day]"><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time" class="practical-from" name="practical_dates[2][from]"></td><td><input type="time" class="practical-to" name="practical_dates[2][to]"></td><td><input class="practicalH" name="practical_dates[2][hours]" value="0" oninput="calc()"></td></tr>
+      <tr><td>4</td><td><input type="date" class="practical-date" name="practical_dates[3][date]"></td><td><select class="practical-day" name="practical_dates[3][day]"><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time" class="practical-from" name="practical_dates[3][from]"></td><td><input type="time" class="practical-to" name="practical_dates[3][to]"></td><td><input class="practicalH" name="practical_dates[3][hours]" value="0" oninput="calc()"></td></tr>
+      <tr><td>5</td><td><input type="date" class="practical-date" name="practical_dates[4][date]"></td><td><select class="practical-day" name="practical_dates[4][day]"><option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option></select></td><td><input type="time" class="practical-from" name="practical_dates[4][from]"></td><td><input type="time" class="practical-to" name="practical_dates[4][to]"></td><td><input class="practicalH" name="practical_dates[4][hours]" value="0" oninput="calc()"></td></tr>
     </table>
-    <button class="add" onclick="addRow('practicalTable','practical')">+ Add Practical</button>
+    <button type="button" class="add" onclick="addRow('practicalTable','practical')">+ Add Practical</button>
   </div>
 
   <!-- BILL SUMMARY -->
   <div class="section grid">
-    <div><label>Theory Hours :</label><input id="theoryTotal" readonly></div>
-    <div><label>Theory Rate :</label><input id="theoryRate" oninput="calcBill()"></div>
-    <div><label>Practical Hours :</label><input id="practicalTotal" readonly></div>
-    <div><label>Practical Rate :</label><input id="practicalRate" oninput="calcBill()"></div>
+    <div><label>Theory Hours :</label><input id="theoryTotal" name="theory_total" readonly></div>
+    <div><label>Theory Rate (₹/hr):</label><input id="theoryRate" name="theory_rate" value="500" oninput="calcBill()"></div>
+    <div><label>Practical Hours :</label><input id="practicalTotal" name="practical_total" readonly></div>
+    <div><label>Practical Rate (₹/hr):</label><input id="practicalRate" name="practical_rate" value="750" oninput="calcBill()"></div>
   </div>
 
   <div class="total-box">
     Total Bill Amount ₹ <span id="totalBill">0</span>
+    <input type="hidden" name="total_bill" id="totalBillHidden">
   </div>
 
   <!-- DIGITAL SIGNATURE -->
   <div class="section">
     <h3>Digital Signature</h3>
-    <canvas id="sign"></canvas>
-    <button class="add" onclick="clearSignature()">Clear Signature</button>
+    <canvas id="sign" width="500" height="120"></canvas>
+    <button type="button" class="add" onclick="clearSignature()">Clear Signature</button>
   </div>
 
-  <button class="add">Submit Bill</button>
+  <button type="submit" name="submit_bill" class="add" style="width: 100%; font-size: 18px; padding: 15px; margin-top: 20px;">Submit Bill</button>
 
 </div>
+</form>
 
-<script src="salary.js"></script>
+<script>
+// Auto-calculate hours between time inputs
+document.addEventListener('input', function(e) {
+    if (e.target.classList.contains('theory-from') || e.target.classList.contains('theory-to') || 
+        e.target.classList.contains('practical-from') || e.target.classList.contains('practical-to')) {
+        calcHours(e.target);
+    }
+});
+
+function calcHours(timeInput) {
+    const row = timeInput.closest('tr');
+    const fromInput = row.querySelector('input[type="time"]:nth-of-type(1)');
+    const toInput = row.querySelector('input[type="time"]:nth-of-type(2)');
+    const hoursInput = row.querySelector('.theoryH, .practicalH');
+    
+    if (fromInput && toInput && fromInput.value && toInput.value) {
+        const from = new Date('2000-01-01T' + fromInput.value);
+        const to = new Date('2000-01-01T' + toInput.value);
+        let hours = (to - from) / (1000 * 60 * 60);
+        hours = Math.max(0, Math.round(hours * 100) / 100);
+        if (hoursInput) hoursInput.value = hours;
+    }
+    calc();
+}
+
+function calc() {
+    let theoryTotal = 0;
+    document.querySelectorAll('.theoryH').forEach(input => {
+        theoryTotal += parseFloat(input.value) || 0;
+    });
+    document.getElementById('theoryTotal').value = theoryTotal.toFixed(2);
+    
+    let practicalTotal = 0;
+    document.querySelectorAll('.practicalH').forEach(input => {
+        practicalTotal += parseFloat(input.value) || 0;
+    });
+    document.getElementById('practicalTotal').value = practicalTotal.toFixed(2);
+    
+    calcBill();
+}
+
+function calcBill() {
+    const theoryTotal = parseFloat(document.getElementById('theoryTotal').value) || 0;
+    const theoryRate = parseFloat(document.getElementById('theoryRate').value) || 0;
+    const practicalTotal = parseFloat(document.getElementById('practicalTotal').value) || 0;
+    const practicalRate = parseFloat(document.getElementById('practicalRate').value) || 0;
+    
+    const total = (theoryTotal * theoryRate) + (practicalTotal * practicalRate);
+    document.getElementById('totalBill').textContent = total.toLocaleString('en-IN');
+    document.getElementById('totalBillHidden').value = total;
+}
+
+let rowCount = { theory: 5, practical: 5 };
+
+function addRow(tableId, type) {
+    const table = document.getElementById(tableId);
+    const row = table.insertRow(-1);
+    const sr = ++rowCount[type];
+    
+    row.innerHTML = `
+        <td>${sr}</td>
+        <td><input type="date" class="${type}-date" name="${type}_dates[${sr-1}][date]"></td>
+        <td><select class="${type}-day" name="${type}_dates[${sr-1}][day]">
+            <option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option><option>Fri</option><option>Sat</option>
+        </select></td>
+        <td><input type="time" class="${type}-from" name="${type}_dates[${sr-1}][from]"></td>
+        <td><input type="time" class="${type}-to" name="${type}_dates[${sr-1}][to]"></td>
+        <td><input class="${type}H" name="${type}_dates[${sr-1}][hours]" value="0" oninput="calc()"></td>
+    `;
+    
+    // Add event listeners for new time inputs
+    row.querySelectorAll('input[type="time"]').forEach(input => {
+        input.addEventListener('input', function() { calcHours(this); });
+    });
+}
+
+// Signature functionality
+const canvas = document.getElementById('sign');
+if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mouseout', stopDrawing);
+
+    function startDrawing(e) {
+        isDrawing = true;
+        draw(e);
+    }
+
+    function draw(e) {
+        if (!isDrawing) return;
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = '#000';
+        
+        const rect = canvas.getBoundingClientRect();
+        ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    }
+
+    function stopDrawing() {
+        if (isDrawing) {
+            ctx.beginPath();
+            isDrawing = false;
+        }
+    }
+
+    window.clearSignature = function() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    };
+}
+
+// Initialize calculations
+calc();
+</script>
 </body>
 </html>

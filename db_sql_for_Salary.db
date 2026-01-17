@@ -1,0 +1,65 @@
+-- Table 1: Faculty Master (Faculty Details)
+CREATE TABLE `faculty` (
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `faculty_name` VARCHAR(255) NOT NULL,
+    `email` VARCHAR(255) UNIQUE NOT NULL,
+    `phone` VARCHAR(15) NOT NULL,
+    `gender` ENUM('Male', 'Female', 'Other') NOT NULL,
+    `salary` DECIMAL(10,2) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX `idx_email` (`email`),
+    INDEX `idx_phone` (`phone`)
+);
+
+-- Table 2: Bills Master (Bill Header)
+CREATE TABLE `bills` (
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `bill_number` VARCHAR(50) UNIQUE NOT NULL,
+    `faculty_id` INT NOT NULL,
+    `bill_date` DATE NOT NULL,
+    `class_name` VARCHAR(100) NOT NULL,
+    `semester` TINYINT(1) NOT NULL CHECK (`semester` BETWEEN 1 AND 6),
+    `subject` VARCHAR(255) NOT NULL,
+    `month` VARCHAR(20) NOT NULL,
+    `theory_hours` DECIMAL(6,2) DEFAULT 0.00,
+    `theory_rate` DECIMAL(8,2) DEFAULT 0.00,
+    `practical_hours` DECIMAL(6,2) DEFAULT 0.00,
+    `practical_rate` DECIMAL(8,2) DEFAULT 0.00,
+    `total_bill` DECIMAL(10,2) NOT NULL,
+    `submission_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `ip_address` VARCHAR(45),
+    `status` ENUM('pending', 'approved', 'paid') DEFAULT 'pending',
+    FOREIGN KEY (`faculty_id`) REFERENCES `faculty`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    INDEX `idx_bill_number` (`bill_number`),
+    INDEX `idx_date` (`bill_date`),
+    INDEX `idx_status` (`status`)
+);
+
+-- Table 3: Theory Lectures Details
+CREATE TABLE `theory_lectures` (
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `bill_id` INT NOT NULL,
+    `sr_no` TINYINT NOT NULL,
+    `lecture_date` DATE NOT NULL,
+    `day` VARCHAR(10) NOT NULL,
+    `from_time` TIME,
+    `to_time` TIME,
+    `hours` DECIMAL(4,2) NOT NULL DEFAULT 0.00,
+    FOREIGN KEY (`bill_id`) REFERENCES `bills`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    INDEX `idx_bill_date` (`bill_id`, `lecture_date`)
+);
+
+-- Table 4: Practical Lectures Details
+CREATE TABLE `practical_lectures` (
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `bill_id` INT NOT NULL,
+    `sr_no` TINYINT NOT NULL,
+    `lecture_date` DATE NOT NULL,
+    `day` VARCHAR(10) NOT NULL,
+    `from_time` TIME,
+    `to_time` TIME,
+    `hours` DECIMAL(4,2) NOT NULL DEFAULT 0.00,
+    FOREIGN KEY (`bill_id`) REFERENCES `bills`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    INDEX `idx_bill_date` (`bill_id`, `lecture_date`)
+);
