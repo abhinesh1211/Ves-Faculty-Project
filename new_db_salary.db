@@ -1,0 +1,22 @@
+CREATE DATABASE ves_salary;
+USE ves_salary;
+
+CREATE TABLE salary_bills (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    bill_number VARCHAR(50) UNIQUE,
+    faculty_name VARCHAR(100),
+    email VARCHAR(100),
+    coordinator_email VARCHAR(100),
+    bill_date DATE,
+    class VARCHAR(50),
+    semester VARCHAR(10),
+    subject VARCHAR(100),
+    month VARCHAR(20),
+    theory_hours DECIMAL(5,2),
+    practical_hours DECIMAL(5,2),
+    theory_rate DECIMAL(6,2),
+    practical_rate DECIMAL(6,2),
+    total_amount DECIMAL(10,2),
+    status ENUM('pending','coordinator_approved','admin_approved','rejected') DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

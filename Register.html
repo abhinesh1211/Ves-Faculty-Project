@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Registration</title>
+  <link rel="stylesheet" href="register.css">
+</head>
+<body>
+
+<div class="container">
+  <h1 class="form-title">Faculty Registration</h1>
+
+  <form id="facultyForm" action="register.php" method="POST">
+
+    <!-- PERSONAL DETAILS -->
+    <div class="section">
+      <h3>Personal Details</h3>
+      <div class="grid">
+        <!-- Salutation + Full Name -->
+        <div>
+          <label class="required">Full Name :</label>
+          <div class="name-flex">
+            <select name="salutation" required>
+              <option value="">Select</option>
+              <option>Mr.</option>
+              <option>Ms.</option>
+              <option>Mrs.</option>
+              <option>Dr.</option>
+            </select>
+            <input type="text" name="fullname" placeholder="Enter full name" required>
+          </div>
+        </div>
+
+        <!-- Gender -->
+        <div>
+          <label class="required">Gender :</label>
+          <select name="gender" required>
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <!-- Date of Birth -->
+        <div>
+          <label class="required">Date of Birth :</label>
+          <input type="date" name="dob" value="1975-01-01" required>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label class="required">Email :</label>
+          <input type="email" name="email" placeholder="example@gmail.com" required
+                 pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+        </div>
+
+        <!-- Phone -->
+        <div>
+          <label class="required">Phone :</label>
+          <input type="tel" name="phone" placeholder="9876543210"
+                 inputmode="numeric" pattern="[0-9]{10}" maxlength="10" required>
+        </div>
+
+        <!-- Qualification -->
+        <div>
+          <label class="required">Qualification :</label>
+          <input type="text" name="qualification" placeholder="Eg: M.Tech, PhD, MBA" required>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOCUMENTS -->
+    <div class="section">
+      <h3>Documents</h3>
+
+      <div class="document-row">
+        <label class="required">Resume Google Drive Link :</label>
+        <input type="text" name="resume_link" placeholder="Paste the Google Drive link" required>
+      </div>
+
+      <div class="document-row">
+        <label class="required">Aadhaar Card Number :</label>
+        <input type="text" name="aadhaar" placeholder="1234 5678 9012"
+               pattern="[0-9]{12}" maxlength="12" required>
+      </div>
+
+      <div class="document-row">
+        <label class="required">Aadhaar Google Drive Link :</label>
+        <input type="text" name="aadhaar_link" placeholder="Paste the Google Drive link" required>
+      </div>
+
+      <div class="document-row">
+        <label class="required">PAN Card Number :</label>
+        <input type="text" name="pan" placeholder="ABCDE1234F"
+               pattern="^[A-Z]{5}[0-9]{4}[A-Z]{1}$" maxlength="10"
+               style="text-transform: uppercase;" oninput="this.value=this.value.toUpperCase()" required>
+      </div>
+
+      <div class="document-row">
+        <label class="required">PAN Google Drive Link :</label>
+        <input type="text" name="pan_link" placeholder="Paste the Google Drive link" required>
+      </div>
+    </div>
+
+    <!-- BANK DETAILS -->
+    <div class="section">
+      <h3>Bank Details</h3>
+      <div class="grid">
+        <div>
+          <label class="required">Account Number :</label>
+          <input type="text" name="account" placeholder="Enter account number"
+                 pattern="[0-9]{9,18}" maxlength="18" required>
+        </div>
+
+        <div>
+          <label class="required">IFSC Code :</label>
+          <input type="text" name="ifsc" placeholder="SBIN0012345"
+                 maxlength="11" style="text-transform: uppercase;"
+                 oninput="this.value=this.value.toUpperCase()" required>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit">Submit Registration</button>
+  </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faculty Salary Bill</title>
+<style>
+* { box-sizing: border-box; font-family: "Times New Roman", serif; }
+body { margin: 0; background: #f8fafc; padding: 20px; }
+.container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+h1 { text-align: center; color: #1e4d8f; margin-bottom: 30px; }
+.section { margin-bottom: 30px; }
+h3 { color: #1e4d8f; margin-bottom: 15px; border-bottom: 2px solid #e5e7eb; padding-bottom: 5px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+label { display: block; margin-bottom: 5px; font-weight: 600; color: #374151; }
+label.required::after { content: '*'; color: red; }
+input, select { width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px; }
+input:focus, select:focus { outline: none; border-color: #1e4d8f; box-shadow: 0 0 0 3px rgba(30,77,143,0.1); }
+.name-flex { display: flex; gap: 10px; }
+.name-flex select { flex: 0 0 120px; }
+.name-flex input { flex: 1; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { border: 1px solid #d1d5db; padding: 10px; text-align: center; }
+th { background: #f3f4f6; font-weight: 600; color: #1f2937; }
+.add-btn { background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 14px; margin-top: 10px; }
+.add-btn:hover { background: #059669; }
+.submit-btn { background: #1e4d8f; color: white; border: none; padding: 18px; border-radius: 8px; font-size: 18px; width: 100%; cursor: pointer; margin-top: 30px; }
+.submit-btn:hover { background: #1e40af; }
+.summary-grid { background: #f8fafc; padding: 20px; border-radius: 8px; }
+.total-box { background: linear-gradient(135deg, #1e4d8f, #3b82f6); color: white; padding: 25px; border-radius: 12px; text-align: center; font-size: 24px; font-weight: bold; margin: 30px 0; }
+.signature-section { background: #f8fafc; padding: 25px; border-radius: 12px; border: 2px dashed #d1d5db; text-align: center; margin: 30px 0; }
+#signatureCanvas { width: 100%; max-width: 600px; height: 120px; border: 2px solid #d1d5db; border-radius: 8px; background: #fff; cursor: crosshair; }
+@media (max-width: 768px) { .grid { grid-template-columns: 1fr; } .name-flex { flex-direction: column; } .name-flex select { margin-bottom: 10px; } }
+</style>
+</head>
+<body>
+<form action="new_salary.php" method="POST" id="salaryForm">
+<div class="container">
+  <h1>🧾 Visiting Faculty Salary Bill</h1>
+
+  <!-- BASIC INFO -->
+  <div class="section grid">
+    <div><label class="required">Bill Number</label><input type="text" name="bill_number" placeholder="VS/2026/001"></div>
+    <div><label class="required">Bill Date</label><input type="date" name="bill_date" required></div>
+  </div>
+
+  <!-- FACULTY DETAILS -->
+  <div class="section">
+    <h3>👨‍🏫 Faculty Details</h3>
+    <div class="grid">
+      <div>
+        <label class="required">Full Name</label>
+        <div class="name-flex">
+          <select name="salutation">
+            <option>Mr.</option><option>Ms.</option><option>Mrs.</option><option>Dr.</option>
+          </select>
+          <input type="text" name="faculty_name" placeholder="Enter full name" required>
+        </div>
+      </div>
+      <div><label class="required">Email</label><input type="email" name="email" required></div>
+      <div><label class="required">Contact</label><input type="tel" name="contact" pattern="[0-9]{10}" maxlength="10" required></div>
+    </div>
+  </div>
+
+  <!-- BILL DETAILS -->
+  <div class="section">
+    <h3>📚 Bill Details</h3>
+    <div class="grid">
+      <div><label class="required">Class</label><input type="text" name="class" required></div>
+      <div><label class="required">Semester</label><input type="text" name="semester" pattern="[1-8]" maxlength="1" required></div>
+      <div><label class="required">Subject</label><input type="text" name="subject" required></div>
+      <div>
+        <label class="required">Month</label>
+        <select name="month" required>
+          <option value="">Select</option>
+          <option>January</option><option>February</option><option>March</option>
+          <option>April</option><option>May</option><option>June</option>
+          <option>July</option><option>August</option><option>September</option>
+          <option>October</option><option>November</option><option>December</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- COORDINATOR -->
+  <div class="section">
+    <h3>👨‍💼 Coordinator</h3>
+    <div class="grid">
+      <div><label class="required">Coordinator Email</label><input type="email" name="coordinator_email" placeholder="hod@ves.ac.in" required></div>
+    </div>
+  </div>
+
+  <!-- THEORY LECTURES -->
+  <div class="section">
+    <h3>📖 Theory Lectures</h3>
+    <table id="theoryTable">
+      <tr><th>Sr</th><th>Date</th><th>From</th><th>To</th><th>Hours</th></tr>
+      <tr>
+        <td>1</td>
+        <td><input type="date" name="theory_date[]" required></td>
+        <td><input type="time" name="theory_from[]" required></td>
+        <td><input type="time" name="theory_to[]" required></td>
+        <td><input class="theoryH" name="theory_hours[]" value="1" oninput="calcTotal()"></td>
+      </tr>
+    </table>
+    <button type="button" class="add-btn" onclick="addRow('theoryTable','theory')">+ Theory</button>
+  </div>
+
+  <!-- PRACTICAL -->
+  <div class="section">
+    <h3>🛠️ Practical Sessions</h3>
+    <table id="practicalTable">
+      <tr><th>Sr</th><th>Date</th><th>From</th><th>To</th><th>Hours</th></tr>
+      <tr>
+        <td>1</td>
+        <td><input type="date" name="practical_date[]" required></td>
+        <td><input type="time" name="practical_from[]" required></td>
+        <td><input type="time" name="practical_to[]" required></td>
+        <td><input class="practicalH" name="practical_hours[]" value="1" oninput="calcTotal()"></td>
+      </tr>
+    </table>
+    <button type="button" class="add-btn" onclick="addRow('practicalTable','practical')">+ Practical</button>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-grid">
+    <div class="grid">
+      <div><label>Theory Hours:</label><input id="theoryTotal" readonly></div>
+      <div><label>Theory Rate ₹/hr:</label><input id="theoryRate" name="theory_rate" placeholder="800" oninput="calcTotal()"></div>
+      <div><label>Practical Hours:</label><input id="practicalTotal" readonly></div>
+      <div><label>Practical Rate ₹/hr:</label><input id="practicalRate" name="practical_rate" placeholder="1000" oninput="calcTotal()"></div>
+    </div>
+  </div>
+
+  <div class="total-box">💰 Total: ₹ <span id="totalAmount">0</span></div>
+
+  <!-- SIGNATURE - MOVED ABOVE SUBMIT -->
+  <div class="section signature-section">
+    <h3>✍️ Digital Signature (Sign Here)</h3>
+    <canvas id="signatureCanvas" width="600" height="120"></canvas><br>
+    <button type="button" class="add-btn" onclick="clearSignature()">Clear</button>
+    <input type="hidden" name="signature_data" id="signatureData">
+  </div>
+
+  <!-- SUBMIT BUTTON -->
+  <button type="submit" class="submit-btn">🚀 Submit → Auto Email to Coordinator</button>
+</div>
+</form>
+
+<script>
+let rowCount = {'theory':1, 'practical':1};
+
+function addRow(tableId, type) {
+  const table = document.getElementById(tableId);
+  const row = table.insertRow();
+  rowCount[type]++;
+  row.innerHTML = `
+    <td>${rowCount[type]}</td>
+    <td><input type="date" name="${type}_date[]" required></td>
+    <td><input type="time" name="${type}_from[]" required></td>
+    <td><input type="time" name="${type}_to[]" required></td>
+    <td><input class="${type}H" name="${type}_hours[]" value="1" oninput="calcTotal()"></td>
+  `;
+}
+
+function calcTotal() {
+  let theoryH = 0, practicalH = 0;
+  document.querySelectorAll('.theoryH').forEach(el => theoryH += parseFloat(el.value)||0);
+  document.querySelectorAll('.practicalH').forEach(el => practicalH += parseFloat(el.value)||0);
+  
+  document.getElementById('theoryTotal').value = theoryH.toFixed(1);
+  document.getElementById('practicalTotal').value = practicalH.toFixed(1);
+  
+  const tRate = parseFloat(document.getElementById('theoryRate').value)||0;
+  const pRate = parseFloat(document.getElementById('practicalRate').value)||0;
+  document.getElementById('totalAmount').textContent = ((theoryH*tRate) + (practicalH*pRate)).toLocaleString('en-IN');
+}
+
+// Signature
+const canvas = document.getElementById('signatureCanvas');
+const ctx = canvas.getContext('2d');
+let drawing = false;
+ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.strokeStyle = '#1e4d8f';
+
+['mousedown','mousemove','mouseup','mouseout'].forEach(evt => {
+  canvas.addEventListener(evt, e => {
+    if(evt==='mousedown'){ drawing=true; ctx.beginPath(); ctx.moveTo(e.offsetX,e.offsetY); }
+    if(evt==='mousemove' && drawing){ ctx.lineTo(e.offsetX,e.offsetY); ctx.stroke(); }
+    if(evt==='mouseup' || evt==='mouseout') drawing=false;
+  });
+});
+
+function clearSignature(){ ctx.clearRect(0,0,canvas.width,canvas.height); }
+
+document.getElementById('salaryForm').addEventListener('submit', () => {
+  document.getElementById('signatureData').value = canvas.toDataURL();
+});
+</script>
+</body>
+</html>

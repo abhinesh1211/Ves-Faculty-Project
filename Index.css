@@ -1,0 +1,132 @@
+:root{
+  --blue:#1e4d8f;
+  --light-blue:#3468b2;
+  --gray:#6b7280;
+  --bg:#f8fafc;
+  --green:#22c55e;
+  --red:#dc2626;
+}
+
+/* GLOBAL */
+*{
+  box-sizing:border-box;
+  font-family:"Times New Roman", Times, serif;
+}
+
+body{
+  margin:0;
+  background:#f8fafc;
+}
+
+/* HEADER (DOCUMENT STYLE) */
+
+.hero{
+  background:var(--blue);
+  color:white;
+  padding:35px 30px;
+}
+
+.hero-content{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+/* Logo on left */
+.hero-img{
+  width:55px;
+  height:auto;
+}
+
+/* Text block */
+.hero-text{
+  flex:1;
+  text-align:center;
+}
+
+/* College name */
+.hero-text h1{
+  margin:0;
+  font-size:1.6rem;
+  font-weight:bold;
+}
+
+/* Subtitle */
+.subtitle{
+  margin-top:6px;
+  font-size:0.95rem;
+  opacity:0.9;
+}
+
+/* CARDS SECTION */
+
+.cards{
+  max-width:1100px;
+  margin:60px auto 40px;
+  padding:0 15px;
+  display:flex;
+  flex-direction:column; /* vertical */
+  gap:20px;
+}
+
+.card{
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 15px 35px rgba(0,0,0,.08);
+  border-left:5px solid var(--blue);
+
+  max-width:600px;     /* REDUCES BLOCK SIZE */
+  width:100%;
+  margin:0 auto;       /* CENTERS EACH BLOCK */
+}
+
+.card h2{
+  margin-top:0;
+}
+
+.card p{
+  color:var(--gray);
+}
+
+/* BUTTONS*/
+
+button{
+  width:100%;
+  padding:12px;
+  border-radius:8px;
+  border:none;
+  cursor:pointer;
+  margin-top:35px;
+  font-size:16px;
+}
+
+.btn-primary{
+  background:var(--light-blue);
+  color:white;
+}
+
+.btn-outline{
+  background:white;
+  border:1.5px solid #c7d2fe;
+  color:var(--light-blue);
+}
+
+a{
+  text-decoration:none;
+}
+
+/*RESPONSIVE */
+
+@media (max-width:900px){
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .hero-content{
+    flex-direction:column;
+    text-align:center;
+  }
+}
